@@ -30,7 +30,7 @@ def resolve(name,DOLOS, Attack,args):
     if name in Attack:
       prRed(name)
     elif name in DOLOS:
-      if args['t']='high':
+      if args['t']=='high':
         prGreen(name)
       else:
         prRed(name)
