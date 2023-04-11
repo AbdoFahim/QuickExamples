@@ -22,8 +22,7 @@ size = 1024
 
 
 
-Sample1=
-{'Number': '5195691061804696',
+Sample1={'Number': '5195691061804696',
 'CVV': '862',
 'Expiry': '01/29',
 'Name': 'Mary West',
@@ -32,8 +31,7 @@ Sample1=
 
 
 
-Sample2={
-'Number': '5122613957048590',
+Sample2={'Number': '5122613957048590',
 'CVV': '765',
 'Expiry': '09/25', 
 'Name': 'Ramon Diaz',
