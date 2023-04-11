@@ -60,5 +60,5 @@ while 1:
     if data:
         bits = data.decode().split(":")
         if bits[0] == 'h':
-            client.send(resolve(bits[1],DOLOS, Attack,args))
+            client.send(resolve(bits[1],DOLOS, Attack,args).encode())
     client.close()
