@@ -1,0 +1,64 @@
+#!/usr/bin/python
+import time
+import random
+import numpy as np
+
+
+import socket
+
+
+
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+
+ 
+# Parse command line arguments
+parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
+parser.add_argument("-t", "-Threshold", default="high")
+
+
+args = vars(parser.parse_args())
+
+
+def prRed(prt):
+    print(f"\033[91m{prt}\033[00m")
+
+def prGreen(prt):
+    print(f"\033[92m{prt}\033[00m")
+
+
+def resolve(name,DOLOS, Attack,args):
+    if name in Attack:
+      prRed(name)
+    elif name in DOLOS:
+      if args['t']='high':
+        prGreen(name)
+      else:
+        prRed(name)
+    else:
+      prGreen(name)
+    return "172.16.45.84"
+
+DOLOS=['sinioecmntnonns.kimik.maohciemwnceo6se.g1o.iaocpt0swebev-bporn07c01.Attack.com',
+ 'rmnts.nromtecsnrkenss.oatocfirmrpi22srdbe6t.r2g88cavr2t8.envceroscmt1b.Attack.com',
+ ]
+
+
+Attack=['cpja-uh.ltllkov3kkxhtair132jjjxygfc.zufs0.c232zkrmtt3mc2lte1r2.h2klsebwh-xu1fs0a.Attack.com',
+'1v1z1zu1zdtqej2xzir3pmbgtzz3gnw.1hxdyo0tmhhonkxgch3ecgcgl0jp132gh3.ikbgx.Attack.com']
+
+
+host = ''
+port = 50000
+backlog = 5
+size = 1024
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind((host,port))
+s.listen(backlog)
+while 1:
+    client, address = s.accept()
+    data = client.recv(size)
+    if data:
+        bits = data.decode().split(":")
+        if bits[0] == 'h':
+            client.send(resolve(bits[1]))
+    client.close()
