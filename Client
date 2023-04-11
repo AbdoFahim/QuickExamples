@@ -115,6 +115,7 @@ for i in All:
 while True:
   var= input('Please enter a command:\n (1) Show Samples of Exfiltrated data\n (2) Exfiltrate using baseline\n (3) Exfiltrate using DOLOS\n (4) Exit\n')
   if var =='1':
+    print('\n*** Showing a credit card example ***\n\n')
     for key in Sample1:
       print(key+': '+ Sample1.get(key))
     print('\n\n')
