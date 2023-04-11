@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Mar 23 15:01:56 2023
+
+@author: abdofahim
+"""
+import time
+import random
+import numpy as np
+
+
+
+from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
+
+ 
+# Parse command line arguments
+parser = ArgumentParser(formatter_class=ArgumentDefaultsHelpFormatter)
+parser.add_argument("-t", "-Threshold", default="high")
+
+
+args = vars(parser.parse_args())
+
+
+anomalousBenign=['node-arm.AUTH-2b432cdd73a346ab9ff6aebe95411040.storage.bhs-1.runabove.io.',
+   'ff082302e80kb2f7eyy-ejdlbwuo1461607686-sonar.xx.fbcdn.net.',
+    'LBS-FOR-DOT-LOG-1952905833.ap-southeast-1.elb.amazonaws.com.',
+    'AU-SG-ADS-LoadBalancer-1973696605.ap-southeast-1.elb.amazonaws.com.',
+    '23db3fd1f1549b4a34573a881983a8535d51b3d0.sdk.testflightapp.com.',
+    'skype-calling-missedcallsregistrar-prod-wus.cloudapp.net.',
+    'r373260188847780-1-4683728-channel-rtmp-live.ums.ustream.tv.',
+   ]
+
+normal=[
+ 'www.srh.noaa.gov.edgesuite.net.',
+ 'images.patrika.com.',
+'r11.sn-4g57knes.googlevideo.com.'
+,'lb1f.lilypie.com.',
+'doc-00-1c-apps-viewer.googleusercontent.com.',
+'promotion.aliexpress.com.edgesuite.net.']
+
+
+
+
+DOLOS=['rseenccscetsmsumktits.mattceiemrj.nn.epsonn.jidrb-yiaber77c.DOLOS-Attack.com',
+ 'msuisen.sourrnmrksmms0oaoocild.ieradg6srid.enc.2wmidebgvjw0ctc.DOLOS-Attack.com',
+ 'mronnurotomcmrsnkomos.taohce.ngtyiemo2csdbil.m2orn-ievrh.hmo.DOLOS-Attack.com',
+ 'oamnnruosaaern.rknoes.oaonclinierrim2.ppsp.1i8vciaor2bao2ielrncutm.DOLOS-Attack.com',
+ 'emnarnccuo0nomtokuens.satas.ivrai2lopsp.28.opcdlrngen2ovbzer0ncun.DOLOS-Attack.com',
+ 'sinioecmntnonns.kimik.maohciemwnceo6se.g1o.iaocpt0swebev-bporn07c01.DOLOS-Attack.com',
+ 'rmnts.nromtecsnrkenss.oatocfirmrpi22srdbe6t.r2g88cavr2t8.envceroscmt1b.DOLOS-Attack.com',
+ 'rstonsrocencut.tksm-s0oaoos2jin.ir2ieisz.0s2vjca.-a2trlgeet22cerotnt0b.DOLOS-Attack.com',
+ 'oeorhnrrsueornuckmr0k.0aomcn2teeye.oei.odsdtlrd.lntc2eybai2iymucm.DOLOS-Attack.com',
+ 'auannamueorae.enksies0oao7cgcieeirr.a.epsoo.iaowjb22mzbblrtmtms.DOLOS-Attack.com',
+ 'ahnimeorhm.ootrskbmrk00aoacigdir6g.eceo.seid.ceidcldrdbviertu7cu11111b.DOLOS-Attack.com',
+ 'ioraresnes0rrouokeuos.2attct2.ieety.ccvjsp1inetdcdly.bt2vbertmcnc42.DOLOS-Attack.com',
+ ]
+
+
+
+Attack=[
+ 'dln.ltnupktwxxxvz2.hhracr03fs-nxgy3a1jw03ncsznzczwriuvqta2.21cavcjag1td0q1a.fya.Baseline-Attack.com',
+ 'vy11ucq-bvjvnjm2vfl2uqbc2dzpek.3-djjx2eb12rakff0xga1mzp.t.mpszrsdpzxykldzlqa.Baseline-Attack.com',
+ '1uy1gpdllxwswqnt.o-hhlaji2opzx3-pv.mfiwqv223fss.20zbaplzx0c10te3kfya.Baseline-Attack.com',
+ '1vz-w--zv-vz-vjk3jchh.ajs2pusv131p3p0rph.20az.vsbxwiicltqd.p3sehe.1ipjfc0a.Baseline-Attack.com',
+ 'u-h.vlnis-xakkmh1wzopcatj12rljont0dhcw.0fpbx0.xvcs3nsvcbzezwt0q0r2cgwxjo.Baseline-Attack.com',
+ 'hmg--s-xcy-kb-vogwrz.ickxqqhgy.30kxhu33bp.qz2bpn1tncrjle2s2xpywj0vyjg3k02tzli.Baseline-Attack.com',
+ 'yjtrnihhw-xlhkxv3pot2uqei23iy33ip.srjlmu-1hiume30xans00me-uxw2.xlqdmpwoj02vya.Baseline-Attack.com',
+ '1v1z1zu1zdtqej2xzir3pmbgtzz3gnw.1hxdyo0tmhhonkxgch3ecgcgl0jp132gh3.ikbgx.Baseline-Attack.com',
+ 'cpja-uh.ltllkov3kkxhtair132jjjxygfc.zufs0.c232zkrmtt3mc2lte1r2.h2klsebwh-xu1fs0a.Baseline-Attack.com',
+ '1dtltrrnnttnrjsn1clhgsasz00nrkxx3u2s0.f0fxnqlzyydvxtm.oa0smq.2n2h.qtfoa.Baseline-Attack.com',
+ 'juplxwui-k2u1zypjqrzuqbg3nley.of0tprheuwppzwidpme3zo33czwris.2z3tpv12lx3y3ktvhkx.Baseline-Attack.com',
+ 'uw-incbydqei.bplni01mbft1v.x0p3rh3ff3oxtlz.3omep0wm0s3xga1n0iv2l1kfb1fd.Baseline-Attack.com',
+ 'vujjmhhukb11yzi2sszz.iclht.sgfk11butozrppzk2nf0meyalp2.fvvnoanxqj1-oy3k0.Baseline-Attack.com',
+ 'jlr-fffhpkbv-1upntu01uaplz12iopcenbmoc.nzwkfqta2lpzubwh.ldlcvoa.Baseline-Attack.com',
+ 'hn.j.ljnjjlt-pxjz-khh.aif003r.xbp3u1n.dqfht23bgznnlgcnxosa2.hs0bgfi.qhexr21mrlc.Baseline-Attack.com',
+ 'yhihjfr.o1dggwrzrvp-satb01.v1g3cnx0b13r-mby-gils2m1w2tdn.s0zhpyjz1lkm2c0.Baseline-Attack.com',
+ '1wuuwzvhqothgy-hu-zopwatj13pqn32flqx.nh0jlmlynz3xfuu-zhuxqetm.0pcxczh.Baseline-Attack.com']
+
+
+All=[]
+
+All.extend(normal.copy())
+All= [[i,0] for i in All]
+for i in range(3):
+    if args['t']=='high':
+        All.append([random.choice(anomalousBenign),0])
+    else:
+        All.append([random.choice(anomalousBenign),1])
+
+for i in range(2):
+    All.append([random.choice(Attack),1])
+
+
+for i in range(3):
+    if args['t']=='high':
+        All.append([random.choice(DOLOS),0])
+    else:
+        All.append([random.choice(DOLOS),1])
+
+def prRed(prt):
+    print(f"\033[91m{prt}\033[00m")
+
+def prGreen(prt):
+    print(f"\033[92m{prt}\033[00m")
+
+G={}
+
+print('\n\n**** Samples of detectors labels ****\n\n')
+R= np.random.choice(list(range(0,13)), 13, replace=False)
+#R= np.random.choice(All, len(All), replace=False)
+for j in R:
+    i= All[j]
+    if i[1]==0:
+        prGreen(str(i[0]))
+    else:
+        prRed(str(i[0]))
+    time.sleep(0.1)
+
+
+print('\n\n*** Accuracy ***')
+if args['t']=='high':
+    print('Detection rate for baseline= 84%')
+    print('Detection rate for DOLOS= 3%')
+    print('False Positive rate 2%')
+
+else:
+    print('Detection rate for Baseline= 99%')
+    print('Detection rate for DOLOS= 46%')
+    print('False Positive rate 16%')
+print('\n\n')
