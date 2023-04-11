@@ -72,6 +72,7 @@ anomalousBenign=['node-arm.AUTH-2b432cdd73a346ab9ff6aebe95411040.storage.bhs-1.r
 Attack=['cpja-uh.ltllkov3kkxhtair132jjjxygfc.zufs0.c232zkrmtt3mc2lte1r2.h2klsebwh-xu1fs0a.Attack.com',
 '1v1z1zu1zdtqej2xzir3pmbgtzz3gnw.1hxdyo0tmhhonkxgch3ecgcgl0jp132gh3.ikbgx.Attack.com']
 
+print('*** This is the DNS resolver ***\n\n')
 
 host = ''
 port = 50000
