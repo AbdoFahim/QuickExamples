@@ -26,7 +26,7 @@ def prGreen(prt):
     print(f"\033[92m{prt}\033[00m")
 
 
-def resolve(name,DOLOS, Attack,args):
+def resolve(name,DOLOS, Attack,anomalousBenign,args):
     if name in Attack:
       prRed(name)
     elif name in DOLOS:
@@ -35,13 +35,27 @@ def resolve(name,DOLOS, Attack,args):
       else:
         prRed(name)
     else:
-      prGreen(name)
+      if args['t']=='high':
+        prGreen(name)
+      else:
+        if name in anomalousBenign:
+          prRed(name)
+        else:
+          prGreen(name)
     return "172.16.45.84"
 
 DOLOS=['sinioecmntnonns.kimik.maohciemwnceo6se.g1o.iaocpt0swebev-bporn07c01.Attack.com',
  'rmnts.nromtecsnrkenss.oatocfirmrpi22srdbe6t.r2g88cavr2t8.envceroscmt1b.Attack.com',
  ]
 
+anomalousBenign=['node-arm.AUTH-2b432cdd73a346ab9ff6aebe95411040.storage.bhs-1.runabove.io.',
+   'ff082302e80kb2f7eyy-ejdlbwuo1461607686-sonar.xx.fbcdn.net.',
+    'LBS-FOR-DOT-LOG-1952905833.ap-southeast-1.elb.amazonaws.com.',
+    'AU-SG-ADS-LoadBalancer-1973696605.ap-southeast-1.elb.amazonaws.com.',
+    '23db3fd1f1549b4a34573a881983a8535d51b3d0.sdk.testflightapp.com.',
+    'skype-calling-missedcallsregistrar-prod-wus.cloudapp.net.',
+    'r373260188847780-1-4683728-channel-rtmp-live.ums.ustream.tv.',
+   ]
 
 Attack=['cpja-uh.ltllkov3kkxhtair132jjjxygfc.zufs0.c232zkrmtt3mc2lte1r2.h2klsebwh-xu1fs0a.Attack.com',
 '1v1z1zu1zdtqej2xzir3pmbgtzz3gnw.1hxdyo0tmhhonkxgch3ecgcgl0jp132gh3.ikbgx.Attack.com']
@@ -60,5 +74,5 @@ while 1:
     if data:
         bits = data.decode().split(":")
         if bits[0] == 'h':
-            client.send(resolve(bits[1],DOLOS, Attack,args).encode())
+            client.send(resolve(bits[1],DOLOS, Attack,anomalousBenign,args).encode())
     client.close()
