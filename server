@@ -7,6 +7,13 @@ import numpy as np
 import socket
 
 
+dns_server_ip = '10.0.0.3'
+dns_server_port = 10000
+
+
+size = 1024
+
+
 
 from argparse import ArgumentParser, ArgumentDefaultsHelpFormatter
 
@@ -32,6 +39,11 @@ def resolve(name,DOLOS, Attack,anomalousBenign,args):
     elif name in DOLOS:
       if args['t']=='high':
         prGreen(name)
+        s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s2.connect((dns_server_ip,dns_server_port))
+        s2.send((name).encode() )
+        data = s2.recv(size)
+        s2.close()
       else:
         prRed(name)
     else:
