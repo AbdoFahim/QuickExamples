@@ -48,13 +48,14 @@ anomalousBenign=['node-arm.AUTH-2b432cdd73a346ab9ff6aebe95411040.storage.bhs-1.r
     'r373260188847780-1-4683728-channel-rtmp-live.ums.ustream.tv.',
    ]
 
+extraNormal=['r11.sn-4g57knes.googlevideo.com'
+,'lb1f.lilypie.com']
+
 normal=[
- 'www.srh.noaa.gov.edgesuite.net.',
- 'images.patrika.com.',
-'r11.sn-4g57knes.googlevideo.com.'
-,'lb1f.lilypie.com.',
-'doc-00-1c-apps-viewer.googleusercontent.com.',
-'promotion.aliexpress.com.edgesuite.net.']
+ 'www.srh.noaa.gov.edgesuite.net',
+ 'images.patrika.com',
+'doc-00-1c-apps-viewer.googleusercontent.com',
+'promotion.aliexpress.com.edgesuite.net']
 
 
 DOLOSExtra=[ 'mronnurotomcmrsnkomos.taohce.ngtyiemo2csdbil.m2orn-ievrh.hmo.DOLOS-Attack.com',
@@ -101,7 +102,7 @@ All.extend(normal.copy())
 All= [[i,0] for i in All]
 for i in range(3):
   All.append([random.choice(anomalousBenign),0])
-
+print("\n*** Benign Traffic is being sent ***\n\n")
 for i in All:
   query= i[0]
   s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -116,7 +117,9 @@ while True:
   if var =='1':
     for key in Sample1:
       print(key+': '+ Sample1.get(key))
+    print('\n\n')
   elif var=='2':
+    print('\n *** exfiltrating with baseline *** \n\n')
     for k in range(2):
       query= Attack[k]
       s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -126,6 +129,7 @@ while True:
       s.close()
       time.sleep(0.5)
   elif var=='3':
+    print('\n *** exfiltrating with DOLOS *** \n\n')
     for k in range(2):
       query= DOLOS[k]
       s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
