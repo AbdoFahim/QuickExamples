@@ -95,6 +95,8 @@ AttackExtra=[
  'yhihjfr.o1dggwrzrvp-satb01.v1g3cnx0b13r-mby-gils2m1w2tdn.s0zhpyjz1lkm2c0.Baseline-Attack.com',
  '1wuuwzvhqothgy-hu-zopwatj13pqn32flqx.nh0jlmlynz3xfuu-zhuxqetm.0pcxczh.Baseline-Attack.com']
 
+All=[]
+
 All.extend(normal.copy())
 All= [[i,0] for i in All]
 for i in range(3):
