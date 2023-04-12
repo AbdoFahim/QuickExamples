@@ -59,7 +59,7 @@ while 1:
       client.close()
     except KeyboardInterrupt:
       break
-client.close()
+#client.close()
 s.shutdown(socket.SHUT_RDWR)
 s.close()
 time.sleep(0.1)
