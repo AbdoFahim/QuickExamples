@@ -63,7 +63,7 @@ client.close()
 s.shutdown(socket.SHUT_RDWR)
 s.close()
 time.sleep(0.1)
-print('closing Correctly')
+#print('closing Correctly')
 sys.exit()
     # quit
 
