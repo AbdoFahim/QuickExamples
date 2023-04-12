@@ -62,6 +62,7 @@ while 1:
 client.close()
 s.close()
 time.sleep(0.1)
+print('closing Correctly')
 sys.exit()
     # quit
 
