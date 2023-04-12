@@ -84,6 +84,7 @@ s.bind((host,port))
 s.listen(backlog)
 while 1:
     client, address = s.accept()
+    client.settimeout(1.0)
     data = client.recv(size)
     if data:
         bits = data.decode().split(":")
