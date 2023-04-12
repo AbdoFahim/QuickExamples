@@ -30,7 +30,7 @@ Sample2={'Number': '5122613957048590',
 DOLOS={'sinioecmntnonns.kimik.maohciemwnceo6se.g1o.iaocpt0swebev-bporn07c01.Attack.com':Sample1,
  'rmnts.nromtecsnrkenss.oatocfirmrpi22srdbe6t.r2g88cavr2t8.envceroscmt1b.Attack.com': Sample2 }
 
-print('\n\n*** This is the receiving server belongin to the attacker***\n\n')
+print('\n\n*** This is the receiving server belonging to the attacker***\n\n')
         
         
 host = ''
