@@ -79,6 +79,7 @@ port = 50000
 backlog = 30
 size = 1024
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.settimeout(2.0)
 s.bind((host,port))
 s.listen(backlog)
 while 1:
