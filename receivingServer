@@ -60,7 +60,7 @@ while 1:
     except KeyboardInterrupt:
       break
 client.close()
-s.close()
+s.shutdown()
 time.sleep(0.1)
 print('closing Correctly')
 sys.exit()
