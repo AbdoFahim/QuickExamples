@@ -84,10 +84,10 @@ s.bind((host,port))
 s.listen(backlog)
 while 1:
     client, address = s.accept()
-    client.settimeout(1.0)
+    #client.settimeout(1.0)
     data = client.recv(size)
     if data:
         bits = data.decode().split(":")
         if bits[0] == 'h':
             client.send(resolve(bits[1],DOLOS, Attack,anomalousBenign,args).encode())
-    client.close()
+    #client.close()
