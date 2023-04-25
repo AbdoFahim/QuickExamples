@@ -82,6 +82,8 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #s.settimeout(2.0)
 s.bind((host,port))
 s.listen(backlog)
+
+Counter=0
 while 1:
     try:
       client, address = s.accept()
@@ -89,8 +91,11 @@ while 1:
       data = client.recv(size)
       if data:
           bits = data.decode().split(":")
+          Counter+=1
           if bits[0] == 'h':
               client.send(resolve(bits[1],DOLOS, Attack,anomalousBenign,args).encode())
+          if Counter==7:
+              print('\n-----------------------\n')
     except KeyboardInterrupt:
       break
 s.shutdown(socket.SHUT_RDWR)
